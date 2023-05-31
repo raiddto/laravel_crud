@@ -2,9 +2,16 @@ versions:
 php-8.1.10-Win32-vs16-x64
 httpd-2.4.54-win64-VS16
 
+install composer and npm
 
+composer install
+composer update
+npm install vite
+npm run build
 php artisan serve
 php artisan make:model Sale -a (-a, --all Generate a migration, factory, and resource controller for the model)
 	\app\Models\Sale.php
 	\app\Http\Controllers\SaleController.php
 	\database\migrations\2023_05_31_012908_create_sales_table.php
+php artisan migrate
+php artisan storage:link(?)

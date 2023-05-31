@@ -35,10 +35,12 @@ class SaleController extends Controller
             'name' => 'required',
         ]);
 
-        $sale = new Announcement;
+        $sale = new Sale;
 
-        $announcement->user_id = Auth::user()->id;
-        $announcement->save();
+        $sale->name = $request->input('name');
+        $sale->price = $request->input('price');
+        $sale->description = $request->input('description');
+        $sale->save();
 
         return redirect()->back()->with('success', 'Sale was added successfully!');
     }

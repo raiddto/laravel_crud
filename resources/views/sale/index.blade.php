@@ -72,16 +72,16 @@
                                     <div class="modal-body">
                                         @csrf()
                                         <div class="form-group">
-                                            <label for="name" class="col-form-label">Name</label>
-                                            <input type="text" class="form-control" id="name">
+                                            <label for="name" class="col-form-label">Name <span class="text-secondary">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name">
                                         </div>
                                         <div class="form-group">
                                             <label for="price" class="col-form-label">Price</label>
-                                            <input type="number" class="form-control" id="price">
+                                            <input type="number" class="form-control" id="price" name="price">
                                         </div>
                                         <div class="form-group">
                                             <label for="description" class="col-form-label">Description</label>
-                                            <textarea class="form-control" id="description"></textarea>
+                                            <textarea class="form-control" id="description" name="description"></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
