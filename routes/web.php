@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', 'SaleController@index');
 Route::post('store', 'SaleController@store')->name('sale.store');
+Route::get('list', 'SaleController@getSales');

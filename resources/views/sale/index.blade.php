@@ -30,19 +30,8 @@
                                             <th>Price</th>
                                             <th>Description</th>
                                             <th>Date</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach ($sales as $sale)
-                                            <td>{{ $sale->id }}</td>
-                                            <td><?php echo ucfirst($sale->name) ?></td>
-                                            <td>{{ $sale->price }}</td>
-                                            <td><?php echo ucfirst($sale->description) ?></td>
-                                            <td><?php echo date("F d, Y",strtotime($sale->created_at)) ?></td>
-                                            <td></td>
-                                        @endforeach
-                                    </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
@@ -50,7 +39,6 @@
                                             <th>Price</th>
                                             <th>Description</th>
                                             <th>Date</th>
-                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -76,7 +64,7 @@
                                             <input type="text" class="form-control" id="name" name="name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="price" class="col-form-label">Price</label>
+                                            <label for="price" class="col-form-label">Price <span class="text-secondary">*</span></label>
                                             <input type="number" class="form-control" id="price" name="price">
                                         </div>
                                         <div class="form-group">
@@ -98,5 +86,53 @@
         </div>
     </div>
     <script type="text/javascript">
+        $(function () {
+            var sale_url = "{{config('app.url')}}/list/"; // absolute link
+            var table = $('.yajra-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('list') }}",
+                columns: [
+                    {
+                        data: 'id',
+                        name: 'id',
+                        "render": function(data, type, row, meta) {
+                            if(type === 'display'){
+                                data = '<a href="/sales/' + data + '/edit" target="_blank" class="text-primary">' + data + '</a>';
+                            }
+
+                            return data;
+                        }
+                    },
+                    { data: 'name', name: 'name' },
+                    { data: 'price', name: 'price' },
+                    { data: 'description', name: 'description' },
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                        "render": function(data, type, row, meta) {
+                            if(type === 'display'){
+                                data = new Date(data).toLocaleDateString();
+                            }
+
+                            return data;
+                        }
+                    },
+                ],
+                order: [
+                    [0, "desc"]
+                ],
+                dom: "<'row'<'col-sm-12 pb-2'B>>" + "<'row'<'col-sm-5'l><'col-sm-7'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Export',
+                        titleAttr: 'Export',
+                        className: 'btn btn-xs btn-primary'
+                    }
+
+                ]
+            });
+        });
     </script>
 @endsection

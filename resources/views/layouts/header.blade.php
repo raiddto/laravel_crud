@@ -39,20 +39,3 @@
         </div>
     </nav>
 </div>
-<script type="text/javascript">
-  // onload
-  $('a[data-toggle=collapse]').each(function() { 
-      var chevron = $(this).parent().next('div');
-      if ( chevron.hasClass('in') ) {
-          $(this).children('span').removeClass('fas fa-chevron-down').addClass('fas fa-chevron-up');
-      } else {
-          $(this).children('span').removeClass('fas fa-chevron-up').addClass('fas fa-chevron-down');
-      }
-  });
-
-  // click event
-  $('a[data-toggle=collapse]').click( function() {  
-      // swap chevron
-      $(this).children('span').toggleClass('fas fa-chevron-down fas fa-chevron-up');
-  });
-</script>
