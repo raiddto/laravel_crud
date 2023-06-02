@@ -30,6 +30,7 @@
                                             <th>Price</th>
                                             <th>Description</th>
                                             <th>Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -39,6 +40,7 @@
                                             <th>Price</th>
                                             <th>Description</th>
                                             <th>Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -87,23 +89,12 @@
     </div>
     <script type="text/javascript">
         $(function () {
-            var sale_url = "{{config('app.url')}}/list/"; // absolute link
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ url('list') }}",
                 columns: [
-                    {
-                        data: 'id',
-                        name: 'id',
-                        "render": function(data, type, row, meta) {
-                            if(type === 'display'){
-                                data = '<a href="/sales/' + data + '/edit" target="_blank" class="text-primary">' + data + '</a>';
-                            }
-
-                            return data;
-                        }
-                    },
+                    { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
                     { data: 'price', name: 'price' },
                     { data: 'description', name: 'description' },
@@ -118,6 +109,7 @@
                             return data;
                         }
                     },
+                    { data: 'action', name: 'action' },
                 ],
                 order: [
                     [0, "desc"]

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
+use Illuminate\Http\Request;
+use DataTables;
 
 class SaleController extends Controller
 {
@@ -81,12 +83,12 @@ class SaleController extends Controller
     // Get lists
     public function getSales(Request $request) {
         if ($request->ajax()) {
-            $sales = Sale::orderby('id', 'asc')->select('*')->get();
+            $sales = Sale::all();
 
             return Datatables::of($sales)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
