@@ -69,7 +69,19 @@ class SaleController extends Controller
      */
     public function update(UpdateSaleRequest $request, Sale $sale)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+
+        $sale = Sale::findOrFail($sale);
+
+        $sale->name = $request->input('name');
+        $sale->price = $request->input('price');
+        $sale->description = $request->input('description');
+        $sale->save();
+
+        return redirect()->back()->with('success', 'Sale was added successfully!');
     }
 
     /**
@@ -77,7 +89,10 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        $sale = Sale::findOrFail($sale);
+        $sale->delete();
+
+        return redirect('/')->with('success', 'The sale was deleted successfully!');
     }
 
     // Get lists
@@ -88,7 +103,7 @@ class SaleController extends Controller
             return Datatables::of($sales)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a data-toggle="modal" data-id="'. $row->id .'" data-name="'. $row->name .'" data-price="'. $row->price .'" data-description="'. $row->description .'" href="#editSaleModal" class="edit_modal btn btn-primary btn-sm">Edit</a> <a data-toggle="modal" data-id="'. $row->id .'" data-name="'. $row->name .'" href="#deleteSaleModal" class="delete_modal btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
