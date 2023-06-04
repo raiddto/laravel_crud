@@ -15,3 +15,4 @@ php artisan make:model Sale -a (-a, --all Generate a migration, factory, and res
 	\database\migrations\2023_05_31_012908_create_sales_table.php
 php artisan migrate
 php artisan storage:link(?)
+StoreSaleRequest authorize and rules return true

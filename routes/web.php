@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', 'SaleController@index');
 Route::post('store', 'SaleController@store')->name('sale.store');
-Route::post('update', 'SaleController@update')->name('sale.update');
-Route::post('destory', 'SaleController@destory')->name('sale.destory');
+Route::get('update', 'SaleController@update')->name('sale.update');
+Route::delete('destroy/{id}', 'SaleController@destroy')->name('sale.destroy');
 
 // Get all sales
 Route::get('list', 'SaleController@getSales');

@@ -67,14 +67,14 @@ class SaleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSaleRequest $request, Sale $sale)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
         ]);
 
-        $sale = Sale::findOrFail($sale);
+        $sale = Sale::findOrFail($request->id);
 
         $sale->name = $request->input('name');
         $sale->price = $request->input('price');
@@ -87,9 +87,9 @@ class SaleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sale $sale)
+    public function destroy($id)
     {
-        $sale = Sale::findOrFail($sale);
+        $sale = Sale::findOrFail($id);
         $sale->delete();
 
         return redirect('/')->with('success', 'The sale was deleted successfully!');
@@ -103,7 +103,7 @@ class SaleController extends Controller
             return Datatables::of($sales)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $actionBtn = '<a data-toggle="modal" data-id="'. $row->id .'" data-name="'. $row->name .'" data-price="'. $row->price .'" data-description="'. $row->description .'" href="#editSaleModal" class="edit_modal btn btn-primary btn-sm">Edit</a> <a data-toggle="modal" data-id="'. $row->id .'" data-name="'. $row->name .'" href="#deleteSaleModal" class="delete_modal btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a data-toggle="modal" data-id="'. $row->id .'" data-name="'. $row->name .'" data-price="'. $row->price .'" data-description="'. $row->description .'" href="#editSaleModal" class="edit_modal btn btn-primary btn-sm" data-backdrop="static" data-keyboard="false">Edit</a> <a data-toggle="modal" data-id="'. $row->id .'" data-name="'. $row->name .'" href="#deleteSaleModal" class="delete_modal btn btn-danger btn-sm" data-backdrop="static" data-keyboard="false">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
