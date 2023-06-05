@@ -31,7 +31,7 @@
                         </label>
                     </div> -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-                    <a href="/register" class="btn btn-info btn-lg btn-block">Register</a>
+                    <a href="/register" class="btn btn-default btn-lg btn-block">Register</a>
                 </form>
             </div>
             <!-- <div class="card-footer bg-white p-0  ">
