@@ -12,13 +12,9 @@
                     <div class="card">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h3 class="m-0 text-primary">All Sales</h3>
-                            @if (Route::has('login'))
-                                @auth
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSaleModal">
-                                        <i class="fas fa-plus"></i> Add
-                                    </button>
-                                @endauth
-                            @endif
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSaleModal">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -48,7 +44,7 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- Create Modal -->
+                        <!-- Create Sale Modal -->
                         <div class="modal fade" id="addSaleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -82,8 +78,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Edit Modal -->
-                        <div class="modal fade edit_modal" id="editSaleModal" tabindex="-1" role="dialog" aria-labelledby="editSaleModal" aria-hidden="true">
+                        <!-- Edit Sale Modal -->
+                        <div class="modal fade" id="editSaleModal" tabindex="-1" role="dialog" aria-labelledby="editSaleModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -118,8 +114,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Delete Modal -->
-                        <div class="modal fade delete_modal" id="deleteSaleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSaleModal" aria-hidden="true">
+                        <!-- Delete Sale Modal -->
+                        <div class="modal fade" id="deleteSaleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSaleModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -160,8 +156,8 @@
                     { data: 'price', name: 'price' },
                     { data: 'description', name: 'description' },
                     {
-                        data: 'created_at',
-                        name: 'created_at',
+                        data: 'updated_at',
+                        name: 'updated_at',
                         "render": function(data, type, row, meta) {
                             if(type === 'display'){
                                 data = new Date(data).toLocaleDateString();

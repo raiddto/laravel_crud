@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+Route::group(['middleware' => 'auth'], function() {
 Route::get('/', 'SaleController@index');
 Route::post('store', 'SaleController@store')->name('sale.store');
-Route::get('update', 'SaleController@update')->name('sale.update');
+Route::patch('update/{id}', 'SaleController@update')->name('sale.update');
 Route::delete('destroy/{id}', 'SaleController@destroy')->name('sale.destroy');
 
 // Get all sales
 Route::get('list', 'SaleController@getSales');
+});

@@ -67,18 +67,22 @@ class SaleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'price' => 'required',
+            'edit_name' => 'required',
+            'edit_price' => 'required'
+        ],
+        [
+            'edit_name' => 'The name field is required.',
+            'edit_price' => 'The price field is required.'
         ]);
 
-        $sale = Sale::findOrFail($request->id);
+        $sale = Sale::findOrFail($id);
 
-        $sale->name = $request->input('name');
-        $sale->price = $request->input('price');
-        $sale->description = $request->input('description');
+        $sale->name = $request->input('edit_name');
+        $sale->price = $request->input('edit_price');
+        $sale->description = $request->input('edit_description');
         $sale->save();
 
         return redirect()->back()->with('success', 'Sale was added successfully!');
